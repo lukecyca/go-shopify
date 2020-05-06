@@ -81,6 +81,24 @@ func TestVariantList(t *testing.T) {
 	}
 }
 
+func TestVariantListAll(t *testing.T) {
+	setup()
+	defer teardown()
+
+	httpmock.RegisterResponder("GET", fmt.Sprintf("https://fooshop.myshopify.com/%s/variants.json", client.pathPrefix),
+		httpmock.NewStringResponder(200, `{"variants": [{"id":1},{"id":2}]}`))
+
+	variants, err := client.Variant.ListAll(nil)
+	if err != nil {
+		t.Errorf("Variant.ListAll returned error: %v", err)
+	}
+
+	expected := []Variant{{ID: 1}, {ID: 2}}
+	if !reflect.DeepEqual(variants, expected) {
+		t.Errorf("Variant.ListAll returned %+v, expected %+v", variants, expected)
+	}
+}
+
 func TestVariantCount(t *testing.T) {
 	setup()
 	defer teardown()
@@ -114,6 +132,24 @@ func TestVariantCount(t *testing.T) {
 	expected = 2
 	if cnt != expected {
 		t.Errorf("Variant.Count returned %d, expected %d", cnt, expected)
+	}
+}
+
+func TestVariantCountAll(t *testing.T) {
+	setup()
+	defer teardown()
+
+	httpmock.RegisterResponder("GET", fmt.Sprintf("https://fooshop.myshopify.com/%s/variants/count.json", client.pathPrefix),
+		httpmock.NewStringResponder(200, `{"count": 3}`))
+
+	cnt, err := client.Variant.CountAll(nil)
+	if err != nil {
+		t.Errorf("Variant.CountAll returned error: %v", err)
+	}
+
+	expected := 3
+	if cnt != expected {
+		t.Errorf("Variant.CountAll returned %d, expected %d", cnt, expected)
 	}
 }
 

@@ -15,7 +15,9 @@ const variantsResourceName = "variants"
 // See https://help.shopify.com/api/reference/product_variant
 type VariantService interface {
 	List(int64, interface{}) ([]Variant, error)
+	ListAll(interface{}) ([]Variant, error)
 	Count(int64, interface{}) (int, error)
+	CountAll(interface{}) (int, error)
 	Get(int64, interface{}) (*Variant, error)
 	Create(int64, Variant) (*Variant, error)
 	Update(Variant) (*Variant, error)
@@ -81,9 +83,24 @@ func (s *VariantServiceOp) List(productID int64, options interface{}) ([]Variant
 	return resource.Variants, err
 }
 
+// ListAll get all variants (undocumented in Shopify)
+// maximum limit 250, with parameter since_id, get others variants
+func (s *VariantServiceOp) ListAll(options interface{}) ([]Variant, error) {
+	path := fmt.Sprintf("%s.json", variantsBasePath)
+	resource := new(VariantsResource)
+	err := s.client.Get(path, resource, options)
+	return resource.Variants, err
+}
+
 // Count variants
 func (s *VariantServiceOp) Count(productID int64, options interface{}) (int, error) {
 	path := fmt.Sprintf("%s/%d/variants/count.json", productsBasePath, productID)
+	return s.client.Count(path, options)
+}
+
+// CountAll variants (undocumented in Shopify)
+func (s *VariantServiceOp) CountAll(options interface{}) (int, error) {
+	path := fmt.Sprintf("%s/count.json", variantsBasePath)
 	return s.client.Count(path, options)
 }
 
