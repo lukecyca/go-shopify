@@ -27,7 +27,7 @@ type InventoryLevelServiceOp struct {
 type InventoryLevel struct {
 	InventoryItemID   int64      `json:"inventory_item_id,omitempty"`
 	LocationID        int64      `json:"location_id,omitempty"`
-	Available         int        `json:"available,omitempty"`
+	Available         int        `json:"available"`
 	CreatedAt         *time.Time `json:"created_at,omitempty"`
 	UpdatedAt         *time.Time `json:"updated_at,omitempty"`
 	AdminGraphqlAPIID string     `json:"admin_graphql_api_id,omitempty"`
