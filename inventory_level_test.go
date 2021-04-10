@@ -188,3 +188,27 @@ func TestInventoryLevelSet(t *testing.T) {
 
 	inventoryLevelTests(t, level)
 }
+
+func TestInventoryLevelSetZero(t *testing.T) {
+	setup()
+	defer teardown()
+
+	httpmock.RegisterResponder(
+		"POST",
+		fmt.Sprintf("https://fooshop.myshopify.com/%s/inventory_levels/set.json", client.pathPrefix),
+		httpmock.NewBytesResponder(200, loadFixture("inventory_level.json")),
+	)
+
+	options := InventoryLevel{
+		InventoryItemID: 1,
+		LocationID:      1,
+		Available:       0,
+	}
+
+	level, err := client.InventoryLevel.Set(options)
+	if err != nil {
+		t.Errorf("InventoryLevels.Set returned error: %v", err)
+	}
+
+	inventoryLevelTests(t, level)
+}
