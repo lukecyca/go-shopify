@@ -60,6 +60,10 @@ type Customer struct {
 	CreatedAt           *time.Time         `json:"created_at,omitempty"`
 	UpdatedAt           *time.Time         `json:"updated_at,omitempty"`
 	Metafields          []Metafield        `json:"metafields,omitempty"`
+
+	// used for create only
+	SendWelcomeEmail bool `json:"send_email_welcome"`
+	SendInviteEmail  bool `json:"send_email_invite"`
 }
 
 // Represents the result from the customers/X.json endpoint
