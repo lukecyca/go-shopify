@@ -14,15 +14,15 @@ func inventoryLevelTests(t *testing.T, item *InventoryLevel) {
 	}
 
 	expectedInt := int64(808950810)
-	if item.InventoryItemID != expectedInt {
-		t.Errorf("InventoryLevel.InventoryItemID returned %+v, expected %+v",
-			item.InventoryItemID, expectedInt)
+	if item.InventoryItemId != expectedInt {
+		t.Errorf("InventoryLevel.InventoryItemId returned %+v, expected %+v",
+			item.InventoryItemId, expectedInt)
 	}
 
 	expectedInt = int64(905684977)
-	if item.LocationID != expectedInt {
-		t.Errorf("InventoryLevel.LocationID is %+v, expected %+v",
-			item.LocationID, expectedInt)
+	if item.LocationId != expectedInt {
+		t.Errorf("InventoryLevel.LocationId is %+v, expected %+v",
+			item.LocationId, expectedInt)
 	}
 
 	expectedAvailable := 6
@@ -55,7 +55,7 @@ func TestInventoryLevelsList(t *testing.T) {
 	inventoryLevelsTests(t, levels)
 }
 
-func TestInventoryLevelListWithItemID(t *testing.T) {
+func TestInventoryLevelListWithItemId(t *testing.T) {
 	setup()
 	defer teardown()
 
@@ -70,7 +70,7 @@ func TestInventoryLevelListWithItemID(t *testing.T) {
 	)
 
 	options := InventoryLevelListOptions{
-		InventoryItemIDs: []int64{1, 2},
+		InventoryItemIds: []int64{1, 2},
 	}
 
 	levels, err := client.InventoryLevel.List(options)
@@ -81,7 +81,7 @@ func TestInventoryLevelListWithItemID(t *testing.T) {
 	inventoryLevelsTests(t, levels)
 }
 
-func TestInventoryLevelListWithLocationID(t *testing.T) {
+func TestInventoryLevelListWithLocationId(t *testing.T) {
 	setup()
 	defer teardown()
 
@@ -96,7 +96,7 @@ func TestInventoryLevelListWithLocationID(t *testing.T) {
 	)
 
 	options := InventoryLevelListOptions{
-		LocationIDs: []int64{1, 2},
+		LocationIds: []int64{1, 2},
 	}
 
 	levels, err := client.InventoryLevel.List(options)
@@ -154,8 +154,8 @@ func TestInventoryLevelConnect(t *testing.T) {
 	)
 
 	options := InventoryLevel{
-		InventoryItemID: 1,
-		LocationID:      1,
+		InventoryItemId: 1,
+		LocationId:      1,
 	}
 
 	level, err := client.InventoryLevel.Connect(options)
@@ -177,8 +177,8 @@ func TestInventoryLevelSet(t *testing.T) {
 	)
 
 	options := InventoryLevel{
-		InventoryItemID: 1,
-		LocationID:      1,
+		InventoryItemId: 1,
+		LocationId:      1,
 	}
 
 	level, err := client.InventoryLevel.Set(options)
@@ -200,8 +200,8 @@ func TestInventoryLevelSetZero(t *testing.T) {
 	)
 
 	options := InventoryLevel{
-		InventoryItemID: 1,
-		LocationID:      1,
+		InventoryItemId: 1,
+		LocationId:      1,
 		Available:       0,
 	}
 
