@@ -25,12 +25,12 @@ type InventoryLevelServiceOp struct {
 
 // InventoryLevel represents a Shopify inventory level
 type InventoryLevel struct {
-	InventoryItemID   int64      `json:"inventory_item_id,omitempty"`
-	LocationID        int64      `json:"location_id,omitempty"`
+	InventoryItemId   int64      `json:"inventory_item_id,omitempty"`
+	LocationId        int64      `json:"location_id,omitempty"`
 	Available         int        `json:"available"`
 	CreatedAt         *time.Time `json:"created_at,omitempty"`
 	UpdatedAt         *time.Time `json:"updated_at,omitempty"`
-	AdminGraphqlAPIID string     `json:"admin_graphql_api_id,omitempty"`
+	AdminGraphqlApiId string     `json:"admin_graphql_api_id,omitempty"`
 }
 
 // InventoryLevelResource is used for handling single level requests and responses
@@ -45,16 +45,16 @@ type InventoryLevelsResource struct {
 
 // InventoryLevelListOptions is used for get list
 type InventoryLevelListOptions struct {
-	InventoryItemIDs []int64   `url:"inventory_item_ids,omitempty,comma"`
-	LocationIDs      []int64   `url:"location_ids,omitempty,comma"`
+	InventoryItemIds []int64   `url:"inventory_item_ids,omitempty,comma"`
+	LocationIds      []int64   `url:"location_ids,omitempty,comma"`
 	Limit            int       `url:"limit,omitempty"`
 	UpdatedAtMin     time.Time `url:"updated_at_min,omitempty"`
 }
 
 // InventoryLevelAdjustOptions is used for Adjust inventory levels
 type InventoryLevelAdjustOptions struct {
-	InventoryItemID int64 `json:"inventory_item_id"`
-	LocationID      int64 `json:"location_id"`
+	InventoryItemId int64 `json:"inventory_item_id"`
+	LocationId      int64 `json:"location_id"`
 	Adjust          int   `json:"available_adjustment"`
 }
 
@@ -67,9 +67,9 @@ func (s *InventoryLevelServiceOp) List(options interface{}) ([]InventoryLevel, e
 }
 
 // Delete an inventory level
-func (s *InventoryLevelServiceOp) Delete(itemID, locationID int64) error {
+func (s *InventoryLevelServiceOp) Delete(itemId, locationId int64) error {
 	path := fmt.Sprintf("%s.json?inventory_item_id=%v&location_id=%v",
-		inventoryLevelsBasePath, itemID, locationID)
+		inventoryLevelsBasePath, itemId, locationId)
 	return s.client.Delete(path)
 }
 
