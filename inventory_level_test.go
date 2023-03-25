@@ -116,8 +116,8 @@ func TestInventoryLevelAdjust(t *testing.T) {
 		httpmock.NewBytesResponder(200, loadFixture("inventory_level.json")))
 
 	option := InventoryLevelAdjustOptions{
-		InventoryItemID: 808950810,
-		LocationID:      905684977,
+		InventoryItemId: 808950810,
+		LocationId:      905684977,
 		Adjust:          6,
 	}
 
